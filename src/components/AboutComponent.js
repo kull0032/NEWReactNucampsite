@@ -2,6 +2,7 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { PARTNERS } from '../shared/partners';
+import { baseUrl } from '../shared/baseUrl';
 
 
 function About(props) {
@@ -79,7 +80,7 @@ function RenderPartner ({ partner }) {
     if (partner) {
         return (
             <React.Fragment>
-                <Media object src={partner.image} alt="{partner.name}" width="150" />
+                <Media object src={baseUrl + partner.image} alt="{partner.name}" width="150" />
                 <Media body className="ml-5 mb-4">
                     <Media heading> 
                         {partner.name}
@@ -93,5 +94,16 @@ function RenderPartner ({ partner }) {
         <div></div>
     )
 }
+
+function PartnerList (props) {
+    const partners = props.partners.map(partner => {
+        return (
+            <Media tag="li" key="{partners.id}">
+                <RenderPartner partner={partner} />
+            </Media>
+        );
+    })
+}
+
 
 export default About;
